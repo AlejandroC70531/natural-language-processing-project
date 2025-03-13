@@ -38,7 +38,7 @@ public class NBAnalyzer {
   }
   
 /**
- * Takes user input and executes certain methods based off the input
+ * Student Developed; Takes user input and executes certain methods based off the input
  *
  * Precondition: N/A
  * Postcondition: N/A
@@ -205,7 +205,7 @@ public class NBAnalyzer {
   }
 
 /**
- * Finds the locations of teams based off what team(s) to look for
+ * Student Developed; Finds the locations of teams based off what team(s) to look for
  *
  * Precondition: category, conference, and teamName are != null and are expected arguments
  * Postcondition: The chosenLocations and locationCounts instance variables now have values within them.
@@ -265,7 +265,7 @@ public class NBAnalyzer {
   }
 
 /**
- * Adds the location passed from the findLocations method and records its appearance amount
+ * Student Developed; Adds the location passed from the findLocations method and records its appearance amount
  * If it was already added, the count recording how many times it appears increases by 1
  *
  * Precondition: location is a valid and expected location from the locations list
@@ -290,7 +290,7 @@ public class NBAnalyzer {
   }
   
 /**
- * Checks to see if the team passed into the method is in the requested conference
+ * Student Developed; Checks to see if the team passed into the method is in the requested conference
  *
  * Precondition: team is a valid team in the NBA and the desiredConference is located in the NBA
  * Postcondition: A boolean of true or false is returned
@@ -313,7 +313,7 @@ public class NBAnalyzer {
   }
 
 /**
- * Finds the rivalries of teams based off what team(s) to look for
+ * Student Developed; Finds the rivalries of teams based off what team(s) to look for
  *
  * Precondition: category, conference, and teamName are != null and are expected arguments
  * Postcondition: The chosenRivalries and rivalryCounts instance variables now have values within them.
@@ -424,7 +424,7 @@ public void findRivalries(String category, String conference, String teamName) {
   }
 
 /**
- * Adds the average score of every requested team together and divides it by the number of teams before returning it
+ * Student Developed; Adds the average score of every requested team together and divides it by the number of teams before returning it
  *
  * Precondition: category, conference, and teamName are != null and are expected arguments
  * Postcondition: The chosenRivalries and rivalryCounts instance variables now have values within them.
@@ -471,7 +471,7 @@ public void findRivalries(String category, String conference, String teamName) {
  }
 
 /**
- * Predicts and simulates what result a match between two chosen teams would have and possible fluctuations
+ * Student Developed; Predicts and simulates what result a match between two chosen teams would have and possible fluctuations
  * between the prediction and what could happen in real life
  *
  * Precondition: team1 and team2 are valid teams in the NBA
@@ -527,7 +527,7 @@ public void findRivalries(String category, String conference, String teamName) {
   }
 
 /**
- * Compiles the contents of the chosenLocations and locationCounts lists and places each corresponding pair of elements
+ * Student Developed; Compiles the contents of the chosenLocations and locationCounts lists and places each corresponding pair of elements
  * together to be returned as a count of all locations and its amount of mentions
  *
  * Precondition: chosenLocations and locationCounts are filled with the same amount of non-null elements
@@ -554,7 +554,7 @@ public void findRivalries(String category, String conference, String teamName) {
   }
 
 /**
- * Compiles the contents of the chosenRivalries and rivalryCounts lists and places each corresponding pair of elements
+ * Student Developed; Compiles the contents of the chosenRivalries and rivalryCounts lists and places each corresponding pair of elements
  * together to be returned as a count of all rivalries and its amount of mentions
  *
  * Precondition: chosenRivalries and rivalryCounts are filled with the same amount of non-null elements
@@ -577,7 +577,7 @@ public void findRivalries(String category, String conference, String teamName) {
   }
 
 /**
- * Takes a given value and edits the value to end in 0.0 in order to prevent really long decimal values
+ * Student Developed; Takes a given value and edits the value to end in 0.0 in order to prevent really long decimal values
  *
  * Precondition: value is a double with a decimal value greater than 0.0 
  * Postcondition: value is returned with a decimal value of 0.0
