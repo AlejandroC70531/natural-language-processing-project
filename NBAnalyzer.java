@@ -1,16 +1,17 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// Student developed class
 public class NBAnalyzer {
-  private ArrayList<String> teams;
-  private ArrayList<String> locations;
-  private ArrayList<String> chosenLocations;
-  private ArrayList<Integer> locationCounts;
-  private ArrayList<String> rivalries;
-  private ArrayList<String> chosenRivalries;
-  private ArrayList<Integer> rivalryCounts;
-  private ArrayList<String> conference;
-  private ArrayList<Double> averageScores;
+  private ArrayList<String> teams; // List of all team names
+  private ArrayList<String> locations; // List of locations for all teams
+  private ArrayList<String> chosenLocations; // Empty list of requested locations to be filled later
+  private ArrayList<Integer> locationCounts; // Empty list of location mentions to be filled later
+  private ArrayList<String> rivalries; // List of locations for all teams
+  private ArrayList<String> chosenRivalries; // Empty list of requested locations to be filled later
+  private ArrayList<Integer> rivalryCounts; // Empty list of location mentions to be filled later
+  private ArrayList<String> conference; // List of each team's conference in the NBA
+  private ArrayList<Double> averageScores; // List of each team's average score
 
 /**
  * Constructs the analyzer and its data
@@ -45,6 +46,7 @@ public class NBAnalyzer {
  * 
  */
   public void prompt(){
+    // Asks for the desired data range
     Scanner input = new Scanner(System.in);
     System.out.println("Welcome to NBAnalyzer! I'm Michael! How can I help you? Please choose a data range below: ");
     System.out.println("1. NBA");
@@ -53,9 +55,11 @@ public class NBAnalyzer {
     System.out.println("4. Simulate a Match");
     String choice = input.nextLine();
     choice.toLowerCase();
-        
+
+    // Executes certain methods using the "nba" range (all teams)
     while(choice.equals("nba")){
       System.out.println("Cool! Pick what data you'd like to explore: ");
+      // List of types of data to be accessed
       System.out.println("1. Locations");
       System.out.println("2. Rivalries");
       System.out.println("3. Average Points Scored");
@@ -70,6 +74,7 @@ public class NBAnalyzer {
       } else{
         System.out.println("I'm sorry. I didn't understand that. Please try again.");
       }
+      // After first data access, prompts the user if they would like to continue in accessing data in this category, another category, or terminate the program
       System.out.println("Would you like to access any other data in this category, yes or no: ");
       choice = input.nextLine();
       choice.toLowerCase();
@@ -92,10 +97,10 @@ public class NBAnalyzer {
       }
     }
     
-    
+    // Executes methods with the "conference" range (teams in said conference)
     while(choice.equals("conference")){
       System.out.println("Which conference would you like to explore, East or West: ");
-      String chosenConference = input.nextLine();
+      String chosenConference = input.nextLine(); // Prompts user to enter an NBA conference
       System.out.println("Cool! Pick what data you'd like to explore: ");
       System.out.println("1. Locations");
       System.out.println("2. Rivalries");
@@ -132,10 +137,10 @@ public class NBAnalyzer {
         }
       }
     }
-    
+    // Executes methods with the "team" range (individual team given by user)
     while(choice.equals("team")){
       System.out.println("Which team would you like to explore: ");
-      String chosenTeam = input.nextLine();
+      String chosenTeam = input.nextLine(); // Prompts the user to enter one NBA team
       System.out.println("Cool! Pick what data you'd like to explore: ");
       System.out.println("1. Location");
       System.out.println("2. Rivalries");
@@ -172,13 +177,13 @@ public class NBAnalyzer {
         }
       }
     }
-    
+    // Simulates a match using team names and average scores
     while(choice.equals("simulate a match")){
       System.out.println("Cool! Pick your first team: ");
-      String firstTeam = input.nextLine();
+      String firstTeam = input.nextLine(); // Prompts the user to choose one NBA team
       System.out.println("Nice choice! Pick your second team: ");
-      String secondTeam = input.nextLine();
-      System.out.println(simulate(firstTeam, secondTeam));
+      String secondTeam = input.nextLine(); // Prompts the user to choose another NBA team
+      System.out.println(simulate(firstTeam, secondTeam)); // Simulates match between the given teams
       System.out.println("Would you like to simulate another match, yes or no: ");
       choice = input.nextLine();
       choice.toLowerCase();
@@ -216,6 +221,7 @@ public class NBAnalyzer {
  */
 
   public void findLocations(String category, String conference, String teamName){
+    // Removes previous values in chosenLocations() and locationCounts in case of the appearance of a different range/conference/team
     for(int g = 0; g < chosenLocations.size(); g++){
       chosenLocations.remove(g);
       g--;
@@ -235,10 +241,10 @@ public class NBAnalyzer {
           addLocations(currentLocation);
         }
       }
-    } else if(category.equals("Conference")){
+    } else if(category.equals("Conference")){ // Executes if the range is "conference"
       for(int j = 0; j < teams.size(); j++){
         boolean isInConference = findConference(teams.get(j), conference);
-        if(isInConference == true){
+        if(isInConference == true){ // Determines which teams are in the provided conference
         String currentLocation = locations.get(j);
         int commaIndex = currentLocation.indexOf(",");
         if(commaIndex != -1){
@@ -248,7 +254,7 @@ public class NBAnalyzer {
         }
        }
       }
-    } else {
+    } else { // Executes if the range is "team"
       int chosenIndex = 0;
       for(int k = 0; k < teams.size(); k++){
         if(teams.get(k).equals(teamName)){
@@ -278,12 +284,12 @@ public class NBAnalyzer {
     
     for(int i = 0; i < chosenLocations.size(); i++){
       String currentLocation = chosenLocations.get(i);
-      if(currentLocation.equals(location) && !found){
-        locationCounts.set(i, locationCounts.get(i) + 1);
+      if(currentLocation.equals(location) && !found){ // Checks to see if the location (state) is already in chosenLocations
+        locationCounts.set(i, locationCounts.get(i) + 1); // If so, add 1 to its respective mentions count
         found = true;
       }
     }
-      if(!found){
+      if(!found){ // If not, add it to chosenLocations and add a new element to locationCounts
         chosenLocations.add(location);
         locationCounts.add(1);
       }
@@ -404,7 +410,7 @@ public void findRivalries(String category, String conference, String teamName) {
  * Precondition: chosenRivalries and rivalryCounts are currently empty
  * Postcondition: Each count in rivalryCounts is representative of the location in chosenRivalries at the corresponding index
  * 
- * @param   String conferences: The conference to search for rivalries in
+ * @param   String teamName: The team to search for rivalries in
  */
   public void findRivalriesByTeam(String teamName){
     int foundIndex = 0;
@@ -491,7 +497,7 @@ public void findRivalries(String category, String conference, String teamName) {
     String temp2 = "";
     int location1 = 0;
     int location2 = 0;
-    for(int i = 0; i < teams.size(); i++){
+    for(int i = 0; i < teams.size(); i++){ // Determines the index of each chosen team
       if(teams.get(i).equals(team1)){
         temp1 = teams.get(i);
         location1 = i;
@@ -501,7 +507,7 @@ public void findRivalries(String category, String conference, String teamName) {
         location2 = i;
       }
     }
-    if(averageScores.get(location1) > averageScores.get(location2)){
+    if(averageScores.get(location1) > averageScores.get(location2)){ // Using the found indexes, this determines which team has the higher score and what the score is
       lowerTeam = temp2;
       higherTeam = temp1;
       lowerScore = averageScores.get(location2).doubleValue();
@@ -513,10 +519,10 @@ public void findRivalries(String category, String conference, String teamName) {
       higherScore = averageScores.get(location2).doubleValue();
     }
     
-    double percentDifference = ((higherScore - lowerScore) / lowerScore) * 100;
+    double percentDifference = ((higherScore - lowerScore) / lowerScore) * 100; // Percent difference between the higher and lower score
     higherScore = (int) higherScore * (1.0 + (percentDifference / 100));
     lowerScore = (int) lowerScore * (1.0 + (percentDifference / 100));
-    double pointFluctuation = ((higherScore + lowerScore) / 100) * 5;
+    double pointFluctuation = ((higherScore + lowerScore) / 100) * 5; //The possible point fluctuation between the simulation and a real life match
     higherScore = cleanDouble(higherScore);
     lowerScore = cleanDouble(lowerScore);
     pointFluctuation = cleanDouble(pointFluctuation);
@@ -588,7 +594,7 @@ public void findRivalries(String category, String conference, String teamName) {
   public double cleanDouble(double value){
     double negative = value - (value * 2);
     int intForm = (int) value;
-    double subtrahend = negative + intForm;
+    double subtrahend = negative + intForm; // Used to find solely the decimal value of the argument passed through value
     return value + subtrahend;
   }
 }
